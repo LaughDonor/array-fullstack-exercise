@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    command: sh -c "
+        python manage.py migrate &&
+        python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/code
+    environment:
+      DB_HOST: db
+      DB_NAME: "$DB_NAME"
+      DB_USER: "$DB_USER"
+      DJANGO_ALLOWED_HOSTS: "$DJANGO_ALLOWED_HOSTS"
+    secrets:
+      - db_password
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14.1-alpine
+    ports:
+      - "5432:5432"
+    secrets:
+      - db_password
+    environment:
+      POSTGRES_DB: "$DB_NAME"
+      POSTGRES_USER: "$DB_USER"
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+
+secrets:
+   db_password:
+     file: ./secrets/POSTGRES_PASSWORD

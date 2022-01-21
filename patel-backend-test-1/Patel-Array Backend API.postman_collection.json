@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "4c4e0b1c-7f57-4674-b4b5-2dd9a137de23",
+		"name": "Patel-Array Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($credentials: UserInput!) {\r\n    register(data: $credentials) {\r\n        email\r\n    }\r\n}",
+						"variables": "{\r\n    \"credentials\": {\r\n        \"email\": \"tester@123.com\",\r\n        \"password\": \"Password123\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($credentials: UserInput!) {\r\n    register(data: $credentials) {\r\n        email\r\n    }\r\n}",
+						"variables": "{\r\n    \"credentials\": {\r\n        \"email\": \"tester@123.com\",\r\n        \"password\": \"Password123\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currently Logged In User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($credentials: UserInput!) {\r\n    register(data: $credentials) {\r\n        email\r\n    }\r\n}",
+						"variables": "{\r\n    \"credentials\": {\r\n        \"email\": \"tester@123.com\",\r\n        \"password\": \"Password123\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($credentials: UserInput!) {\r\n    register(data: $credentials) {\r\n        email\r\n    }\r\n}",
+						"variables": "{\r\n    \"credentials\": {\r\n        \"email\": \"tester@123.com\",\r\n        \"password\": \"Password123\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000/gql"
+		}
+	]
+}

@@ -1,0 +1,44 @@
+## Stack comprised of Django + Strawberry GraphQL and handle user session data within cookies.
+
+*Setup:* Run `docker-compose up -d` while inside backend directory.
+*Postman:* Should be targeting `http://localhost:8000/gql` for every endpoint
+         Import 'Patel-Array Backend API.postman_collection.json' as Collection
+
+## Postman Collection outlines each of the Endpoints.
+- Initial database is empty
+- All variables can be adjusted in the "GraphQL Variables" window to replace value strings
+- Locally, I had to cancel the first request to the server and try again (after array_db_1 container started)
+  - This is due to some odd name resolution rules fumbling the requests using 0.0.0.0
+
+### Register User:
+ - Validates against existing email addresses
+ - Input passwords are checked against commonly used passwords
+ - Empty email addresses are not allowed
+ - Successful responses return user's email address
+ - Unsuccessful inputs return related errors
+ - Passwords are stored using [scrypt](https://en.wikipedia.org/wiki/Scrypt) hashing algorithm
+
+### User Login:
+ - Username of email address is case-sensitive, and email domain must be lowercase
+ - Successful logins return user's email address and session cookie value
+ - Unsuccessful logins return null
+
+### Currently Logged In User:
+ - No variables; provides email address of currently logged in user
+ - Returns null if not logged in and removes cookie
+
+### User Logout:
+ - No variables; logs out user with matching cookie
+ - Returns true if user was logged in, false otherwise
+
+
+## Design Choices
+ - I've been dabbling with the latest Django and Strawberry GraphQL (the popular Graphene has been losing support)
+   frameworks, so it seemed natural to utilize them. Django has a strong authentication framework that was simple
+   to implement with a lot of the boilerplate already existing.
+ - I tried to avoid as much configuration overhead as possible, so database configuration strings are either in the
+   secrets folder or the .env file. Ideally, the secrets files would be encrypted at rest.
+ - For simplicity, I opted not using docker swarm even though docker secrets/config are typically only available there.
+ - I understand how security of user and service credentials are important so that affected a number of my choices.
+ - Converting this to a full-blown docker swarm can be helpful for scalability of services.
+ - Generated user model can be inferred from reading through `src/app/migrations/0001_initial.py`.
