@@ -1,0 +1,110 @@
+/* Import 'Euclid Circular B' Font Family */
+@import url("//cdn-web-assets.array.io/assets/css/euclid-fonts.8abeba6402d2a1e2efdb8c2ea40f9d81.css");
+
+:root {
+    --expand-transition-time: 0.5s;
+    --text-color-primary: #3e3f42;
+    --text-color-secondary: #6b6c6f;
+    --selection-color: #b3d4fc
+}
+
+html {
+    font-family: 'Euclid Circular B', 'Roboto', 'Open Sans', serif;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 1em;
+}
+
+::selection {
+    background: var(--selection-color);
+    text-shadow: none;
+}
+
+ul, ol, li, h1, h2, h3, h4, h5, h6, p {
+    box-sizing: border-box;
+    color: var(--text-color-primary);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+li, p, .questions > details > summary:after {
+    color: var(--text-color-secondary)
+}
+
+p {
+    margin: 0.25em 0 1em;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ul, ol {
+    list-style-position: inside;
+}
+
+li {
+    margin: 0.25em 0;
+    padding: 0.25em 0;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+h3 {
+    margin-top: 1em;
+    font-weight: 500;
+}
+
+h4 {
+    font-weight: normal;
+}
+
+.credit-lock {
+    margin: 2em 0;
+}
+
+.questions {
+    counter-reset: questions;
+}
+
+.questions > details {
+    border-bottom: 1px solid #ebebeb;
+    padding: 0.5em 0;
+}
+
+.questions > details > summary {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.15em;
+    font-weight: 500;
+    margin: 0.5em 0;
+    width: calc(100% - 1.15em);
+}
+
+.questions > details > summary:before {
+    content: counter(questions) ".";
+    counter-increment: questions;
+    display: inline-block;
+    width: 1.5em;
+}
+
+.questions > details > summary:after {
+    content: "❯";
+    float: right;
+    transform: rotate(-90deg);
+    transition: transform var(--expand-transition-time) ease-out;
+}
+
+.questions > details[open] > summary:after {
+    transform: rotate(-270deg);
+    transition-timing-function: ease-in;
+}

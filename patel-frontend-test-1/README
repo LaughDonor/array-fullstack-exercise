@@ -1,0 +1,37 @@
+## With Python3 installed locally, I executed `python -m http.server` in the
+ `patel-frontend-test-1` folder to serve the static files.
+
+### Open the browser (tested on latest Chromium Engine) to http://localhost:8000 to see the results!
+
+## Design Choices
+- I created this Web Component with a few themes in mind:
+-- I wanted to design a solution utilizing the least amount of Javascript to handle dynamic
+   interactions with the user. This included the use of `<details/>` and `<summary/>` tags
+   in favor of using a "hidden checkbox with label" or "click-event based triggers" to show
+   and hide portions of the webpage.
+-- I chose to simplify the majority of the host page's HTML/CSS structure, but performing
+   the same level of diligence for the Web Component proved to be toilsome. So for the Web
+   Component, I chose to import the minimal amount of CSS and simplify the least amount
+   of HTML to maintain a similar look and feel.
+-- In addition, I removed/renamed all "div"s in the host page for clarity and purpose; I
+   find it to be much cleaner and readable to the original. Since I had imported existing
+   CSS definitions for the Web Component, a number of "div"s there were not able to be
+   transfigured.
+-- I also wanted to remove manual calculation of list indexing by converting those into
+   more appropriate `ol` structures.
+- I did begin to design a method to create DOM elements based on nested structure
+  (`ArrayCreditLock.#createLockSVG`), but later decided to keep templating simple by adding
+  the HTML structure to the element's `innerHTML` attribute due to scalability and readability.
+- test-1_page.html was not altered, but kept for reference for comparisons.
+- The sort order for the items defined in the lock history wasn't defined, but my intuitions
+  suggested that those records were sorted in reverse-chronological order.
+- My intuition also told me that the TransUnion logo could be substituted for another
+  creditor by the implementing page so it was implemented with "slots" in mind. Ideally,
+  the colors and theme should be customizable by the host page, but I left a majority of the
+  Web Component CSS alone for this exercise.
+- I've set up custom animations for the FAQ arrows in order to save time and avoid creating
+  new SVG paths for similar functionality.
+- One frustrating thing that I learned is how it's nearly impossible to adjust the horizontal
+  position of `li #marker`s to line up with it's related content by changing only a handful
+  of CSS properties. To compensate, I set up a CSS variable to increment and display with the
+  `summary:before` tag.
